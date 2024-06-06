@@ -92,15 +92,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<?php include 'theme/app.php';?>
     <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
+        body{ font: 14px sans-serif; padding: 0;}
+        .wrapper{ width: 360px; margin-left: 35%;}
+		
+	
+
+
+		p {
+			font-size: 13px;
+		}
+		@media only screen and (max-width: 700px) {
+		.wrapper{ width: 360px;  margin-left:20%;}
+		}
+		@media only screen and (max-width: 500px) {
+		.wrapper{ width: 360px;  margin-left:7%;}
+		}
+		@media only screen and (max-width: 400px) {
+		.wrapper{ width: 360px;  margin:2%;}
+		}
+
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+
+ 
+  
+    <div class="wrapper" style=" padding: 2% 5%; box-shadow: 1px 7px 8px 1px rgba(0, 0, 0, 0.27); border-radius: 7px; margin-top: 2%;">
+        <h1 style="text-align: center; color: #5B5D52;"><strong style="color:#00AFBC;">Log</strong>in Branch</h1><br>
+        <p style="text-align: center;">Please fill in your credentials to login.</p>
+		<br>
 
         <?php 
         if(!empty($login_err)){
@@ -110,20 +132,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
-                <label>Username</label>
+                <strong><label style="color: #5B5D52; font-size: 13px;">Username</label></strong>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
-                <label>Password</label>
+                <strong><label style="color: #5B5D52; font-size: 13px;">Password</label></strong>
                 <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
-            </div>
+            </div><br>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-primary" value="Login" style="width: 100%;">
             </div>
-            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+            <p style="text-align: center; font-size: 11px;">Don't have an account? <a href="register.php"><strong style="color: #00AFBC;">Sign up now</strong></a>.</p>
         </form>
     </div>
+	
+	
 </body>
 </html>
