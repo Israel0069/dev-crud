@@ -60,6 +60,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <body>
     <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
-    
+    <a href="pages/index.php/" style="color: #333; padding: 10px 25px; border: 1px solid orange; border-radius: 7px; background-color: white; text-decoration: none;"><strong style="color: orange">Check</strong> Employee</a>
 </body>
 </html>
