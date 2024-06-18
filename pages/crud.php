@@ -69,9 +69,10 @@
                                         echo "<th>Address</th>";
                                         echo "<th>Role</th>";
 										echo "<th>Status</th>";
-                                        echo "<th>Action</th>";
+                                        
 										echo "<th>Date Created</th>";
 										echo "<th>Date updated_at</th>";
+										echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
