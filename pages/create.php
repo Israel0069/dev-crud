@@ -3,8 +3,8 @@
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$name = $address = $role = $status = "";
+$name_err = $address_err = $role_err = $status_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -26,31 +26,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $address = $input_address;
     }
     
-    // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Please enter a positive integer value.";
+    // Validate role
+    $input_role = trim($_POST["role"]);
+    if(empty($input_role)){
+        $role_err = "Please enter an role.";     
     } else{
-        $salary = $input_salary;
+        $role = $input_role;
+    }
+	// Validate status
+    $input_status = trim($_POST["status"]);
+    if(empty($input_status)){
+        $status_err = "Please enter an status.";     
+    } else{
+        $status = $input_status;
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($name_err) && empty($address_err) && empty($role_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO employees (name, address, salary) VALUES (:name, :address, :salary)";
+        $sql = "INSERT INTO employees (name, address, role, status) VALUES (:name, :address, :role, :status)";
  
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":name", $param_name);
             $stmt->bindParam(":address", $param_address);
-            $stmt->bindParam(":salary", $param_salary);
+            $stmt->bindParam(":role", $param_role);
+			$stmt->bindParam(":status", $param_status);
             
             // Set parameters
             $param_name = $name;
             $param_address = $address;
-            $param_salary = $salary;
+            $param_role = $role;
+			$param_status = $status;
             
             // Attempt to execute the prepared statement
             if($stmt->execute()){
@@ -103,9 +110,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="invalid-feedback"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="invalid-feedback"><?php echo $salary_err;?></span>
+                            <label>Role</label>
+                            <input type="text" name="role" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $role; ?>">
+                            <span class="invalid-feedback"><?php echo $role_err;?></span>
+                        </div>
+						 <div class="form-group">
+                            <label>Status</label>
+                            <input type="text" name="status" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $status; ?>">
+                            <span class="invalid-feedback"><?php echo $status_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="crud.php" class="btn btn-secondary ml-2">Cancel</a>
