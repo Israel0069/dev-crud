@@ -24,7 +24,11 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 // Retrieve individual field value
                 $name = $row["name"];
                 $address = $row["address"];
-                $salary = $row["salary"];
+                $role = $row["role"];
+				$status = $row["status"];
+				$created_at = $row["created_at"];
+				$updated_at = $row["updated_at"];
+				
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -76,8 +80,20 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <p><b><?php echo $row["address"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Salary</label>
-                        <p><b><?php echo $row["salary"]; ?></b></p>
+                        <label>Role</label>
+                        <p><b><?php echo $row["role"]; ?></b></p>
+                    </div>
+					<div class="form-group">
+                        <label>Status</label>
+                        <p><b><?php echo $row["status"]; ?></b></p>
+                    </div>
+					<div class="form-group">
+                        <label>Date Created</label>
+                        <p><b><?php echo $row["created_at"]; ?></b></p>
+                    </div>
+					<div class="form-group">
+                        <label>Date Updated</label>
+                        <p><b><?php echo $row["updated_at"]; ?></b></p>
                     </div>
                     <p><a href="crud.php" class="btn btn-primary">Back</a></p>
                 </div>

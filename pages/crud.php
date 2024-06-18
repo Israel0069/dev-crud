@@ -70,6 +70,8 @@
                                         echo "<th>Role</th>";
 										echo "<th>Status</th>";
                                         echo "<th>Action</th>";
+										echo "<th>Date Created</th>";
+										echo "<th>Date updated_at</th>";
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
@@ -80,6 +82,8 @@
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['role'] . "</td>";
 										echo "<td>" . $row['status'] . "</td>";
+										echo "<td>" . $row['created_at'] . "</td>";
+										echo "<td>" . $row['updated_at'] . "</td>";
                                         echo "<td>";
                                             echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
