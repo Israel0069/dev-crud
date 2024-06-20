@@ -3,83 +3,46 @@
 require_once "../../config.php";
  
 // Define variables and initialize with empty values
-$subject_name = $subject_description = $unit = $status = $sub_class = $year_level = $pre_rel = $pre_order = $pre_status = $subject_code = "";
-$subject_name_err = $subject_description_err = $unit_err = $status_err = $sub_class_err = $sub_year_level_err = $pre_rel_err = $pre_order_err = $pre_status_err = $subject_code_err = "";
+$subject_tag = $subject_descriptive_title = $subject_units = $subject_semester_offered = $subject_code = "";
+$subject_tag_err = $subject_descriptive_title_err = $subject_units_err = $subject_semester_offered_err = $subject_code_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate subject_name
-    $input_subject_name = trim($_POST["subject_name"]);
-    if(empty($input_subject_name)){
-        $subject_name_err = "Please enter a subject_name.";
-    } elseif(!filter_var($input_subject_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $subject_name_err = "Please enter a valid subject_name.";
+    // Validate subject_tag
+    $input_subject_tag = trim($_POST["subject_tag"]);
+    if(empty($input_subject_tag)){
+        $subject_tag_err = "Please enter a subject_tag.";
+    } elseif(!filter_var($input_subject_tag, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $subject_tag_err = "Please enter a valid subject_tag.";
     } else{
-        $subject_name = $input_subject_name;
+        $subject_tag = $input_subject_tag;
     }
     
-    // Validate subject_description
-    $input_subject_description = trim($_POST["subject_description"]);
-    if(empty($input_subject_description)){
-        $subject_description_err = "Please enter an subject_description.";     
+    // Validate subject_descriptive_title
+    $input_subject_descriptive_title = trim($_POST["subject_descriptive_title"]);
+    if(empty($input_subject_descriptive_title)){
+        $subject_descriptive_title_err = "Please enter an subject_descriptive_title.";     
     } else{
-        $subject_description = $input_subject_description;
+        $subject_descriptive_title = $input_subject_descriptive_title;
     }
     
-    // Validate unit
-    $input_unit = trim($_POST["unit"]);
-    if(empty($input_unit)){
-        $unit_err = "Please enter an unit.";     
+    // Validate subject_units
+    $input_subject_units = trim($_POST["subject_units"]);
+    if(empty($input_subject_units)){
+        $subject_units_err = "Please enter an subject_units.";     
     } else{
-        $unit = $input_unit;
+        $subject_units = $input_subject_units;
     }
-	// Validate status
-    $input_status = trim($_POST["status"]);
-    if(empty($input_status)){
-        $status_err = "Please enter an status.";     
-    } else{
-        $status = $input_status;
-    }
-    
-	// Validate sub_class
-    $input_sub_class = trim($_POST["sub_class"]);
-    if(empty($input_sub_class)){
-        $sub_class_err = "Please enter an sub_class.";     
-    } else{
-        $sub_class = $input_sub_class;
-    }
-	// Validate year_level
-    $input_year_level = trim($_POST["year_level"]);
-    if(empty($input_year_level)){
-        $year_level_err = "Please enter an year_level.";     
-    } else{
-        $year_level = $input_year_level;
-    }
+
 	
-	// Validate pre_rel
-    $input_pre_rel = trim($_POST["pre_rel"]);
-    if(empty($input_pre_rel)){
-        $pre_rel_err = "Please enter an pre_rel.";     
+	// Validate subject_semester_offered
+    $input_subject_semester_offered = trim($_POST["subject_semester_offered"]);
+    if(empty($input_subject_semester_offered)){
+        $subject_semester_offered_err = "Please enter an subject_semester_offered.";     
     } else{
-        $pre_rel = $input_pre_rel;
+        $subject_semester_offered = $input_subject_semester_offered;
     }
-	
-	// Validate pre_order
-    $input_pre_order = trim($_POST["pre_order"]);
-    if(empty($input_pre_order)){
-        $pre_order_err = "Please enter an pre_order.";     
-    } else{
-        $pre_order = $input_pre_order;
-    }
-	
-	// Validate pre_status
-    $input_pre_status = trim($_POST["pre_status"]);
-    if(empty($input_pre_status)){
-        $pre_status_err = "Please enter an pre_status.";     
-    } else{
-        $pre_status = $input_pre_status;
-    }
-	
+
 	// Validate pre_status
     $input_subject_code = trim($_POST["subject_code"]);
     if(empty($input_subject_code)){
@@ -87,35 +50,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $subject_code = $input_subject_code;
     }
+    
 	
+	
+
     // Check input errors before inserting in database
-    if(empty($subject_name_err) && empty($subject_description_err) && empty($unit_err)){
+    if(empty($subject_tag_err) && empty($subject_descriptive_title_err) && empty($subject_units_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO subject (subject_name, subject_description, unit, status, sub_class, year_level, pre_rel, pre_order, pre_status, subject_code) VALUES (:subject_name, :subject_description, :unit, :status, :sub_class, :year_level, :pre_rel, :pre_order, :pre_status, :subject_code)";
+        $sql = "INSERT INTO subject (subject_tag, subject_descriptive_title, subject_units, subject_semester_offered, subject_code) VALUES (:subject_tag, :subject_descriptive_title, :subject_units, :subject_semester_offered, :subject_code)";
  
         if($stmt = $pdo->prepare($sql)){
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":subject_name", $param_subject_name);
-            $stmt->bindParam(":subject_description", $param_subject_description);
-            $stmt->bindParam(":unit", $param_unit);
-			$stmt->bindParam(":status", $param_status);
-			$stmt->bindParam(":sub_class", $param_sub_class);
-			$stmt->bindParam(":year_level", $param_year_level);
-			$stmt->bindParam(":pre_rel", $param_pre_rel);
-			$stmt->bindParam(":pre_order", $param_pre_order);
-			$stmt->bindParam(":pre_status", $param_pre_status);
+            $stmt->bindParam(":subject_tag", $param_subject_tag);
+            $stmt->bindParam(":subject_descriptive_title", $param_subject_descriptive_title);
+            $stmt->bindParam(":subject_units", $param_subject_units);
+			$stmt->bindParam(":subject_semester_offered", $param_subject_semester_offered);
+			
 			$stmt->bindParam(":subject_code", $param_subject_code);
             
             // Set parameters
-            $param_subject_name = $subject_name;
-            $param_subject_description = $subject_description;
-            $param_unit = $unit;
-			$param_status = $status;
-			$param_sub_class = $sub_class;
-			$param_year_level = $year_level; 
-			$param_pre_rel = $pre_rel;
-			$param_pre_order = $pre_order;
-			$param_pre_status = $pre_status;
+            $param_subject_tag = $subject_tag;
+            $param_subject_descriptive_title = $subject_descriptive_title;
+            $param_subject_units = $subject_units;
+			$param_subject_semester_offered = $subject_semester_offered;
+			
 			$param_subject_code = $subject_code;
             
             // Attempt to execute the prepared statement
@@ -159,61 +117,37 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p>Please fill this form and submit to add Subject record to the database.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>subject_name</label>
-                            <input type="text" name="subject_name" class="form-control <?php echo (!empty($subject_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $subject_name; ?>">
-                            <span class="invalid-feedback"><?php echo $subject_name_err;?></span>
+                            <label>subject_tag</label>
+                            <input type="text" name="subject_tag" class="form-control <?php echo (!empty($subject_tag_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $subject_tag; ?>">
+                            <span class="invalid-feedback"><?php echo $subject_tag_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Discription</label>
-                            <textarea name="subject_description" class="form-control <?php echo (!empty($subject_description_err)) ? 'is-invalid' : ''; ?>"><?php echo $subject_description; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $subject_description_err;?></span>
+                            <label>Description</label>
+                            <textarea name="subject_descriptive_title" class="form-control <?php echo (!empty($subject_descriptive_title_err)) ? 'is-invalid' : ''; ?>"><?php echo $subject_descriptive_title; ?></textarea>
+                            <span class="invalid-feedback"><?php echo $subject_descriptive_title_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>unit</label>
-                            <input type="text" name="unit" class="form-control <?php echo (!empty($unit_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $unit; ?>">
-                            <span class="invalid-feedback"><?php echo $unit_err;?></span>
+                            <label>subject_units</label>
+                            <input type="text" name="subject_units" class="form-control <?php echo (!empty($subject_units_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $subject_units; ?>">
+                            <span class="invalid-feedback"><?php echo $subject_units_err;?></span>
                         </div>
-						 <div class="form-group">
-                            <label>Status</label>
-                            <input type="text" name="status" class="form-control <?php echo (!empty($status_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $status; ?>">
-                            <span class="invalid-feedback"><?php echo $status_err;?></span>
-                        </div>
-						 <div class="form-group">
-                            <label>sub_class</label>
-                            <input type="text" name="sub_class" class="form-control <?php echo (!empty($sub_class_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $sub_class; ?>">
-                            <span class="invalid-feedback"><?php echo $sub_class_err;?></span>
-                        </div>
-												 <div class="form-group">
-                            <label>year_level</label>
-                            <input type="text" name="year_level" class="form-control <?php echo (!empty($year_level_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_level; ?>">
-                            <span class="invalid-feedback"><?php echo $year_level_err;?></span>
+
+						
+						<div class="form-group">
+                            <label>subject_semester_offered</label>
+                            <input type="text" name="subject_semester_offered" class="form-control <?php echo (!empty($subject_semester_offered_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $subject_semester_offered; ?>">
+                            <span class="invalid-feedback"><?php echo $subject_semester_offered_err;?></span>
                         </div>
 						
-												 <div class="form-group">
-                            <label>pre_rel</label>
-                            <input type="text" name="pre_rel" class="form-control <?php echo (!empty($pre_rel_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pre_rel; ?>">
-                            <span class="invalid-feedback"><?php echo $pre_rel_err;?></span>
-                        </div>
 						
-												 <div class="form-group">
-                            <label>pre_order</label>
-                            <input type="text" name="pre_order" class="form-control <?php echo (!empty($pre_order_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pre_order; ?>">
-                            <span class="invalid-feedback"><?php echo $pre_order_err;?></span>
-                        </div>
 						
-												 <div class="form-group">
-                            <label>pre_status</label>
-                            <input type="text" name="pre_status" class="form-control <?php echo (!empty($pre_status_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $pre_status; ?>">
-                            <span class="invalid-feedback"><?php echo $pre_status_err;?></span>
-                        </div>
-						
-																		 <div class="form-group">
+						<div class="form-group">
                             <label>subject_code</label>
                             <input type="text" name="subject_code" class="form-control <?php echo (!empty($subject_code_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $subject_code; ?>">
                             <span class="invalid-feedback"><?php echo $subject_code_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
-                        <a href="crud.php" class="btn btn-secondary ml-2">Cancel</a>
+                        <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>        
