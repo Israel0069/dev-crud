@@ -1,0 +1,16 @@
+CREATE TABLE subject (
+    Subject_ID INT(11) PRIMARY KEY AUTO_INCREMENT,
+    subject_name VARCHAR(255) NOT NULL,
+    subject_description TEXT,   
+    status VARCHAR(255),
+    semester VARCHAR(255),
+    unit int(11),
+    sub_class varchar(255),
+    year_level VARCHAR(255),   
+    pre_rel VARCHAR(255),
+    pre_order VARCHAR(255),
+    pre_status VARCHAR(255),
+    subject_code VARCHAR(50) NOT NULL,
+    date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

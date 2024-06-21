@@ -1,0 +1,10 @@
+create table subject (
+subject_id INT(11) PRIMARY KEY AUTO_INCREMENT,
+subject_tag VARCHAR(255) NOT NULL,
+subject_code VARCHAR(255) NOT NULL,
+subject_descriptive_title TEXT,
+subject_semester_offered VARCHAR(255) NOT NULL,
+subject_units int(255) NOT NULL,
+subject_date_created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+subject_date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);

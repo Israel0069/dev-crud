@@ -1,18 +1,18 @@
 <?php
-// Check existence of id parameter before processing further
-if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
+// Check existence of Subject_ID parameter before processing further
+if(isset($_GET["Subject_ID"]) && !empty(trim($_GET["Subject_ID"]))){
     // Include config file
-    require_once "../config.php";
+    require_once "../../config.php";
     
     // Prepare a select statement
-    $sql = "SELECT * FROM employees WHERE id = :id";
+    $sql = "SELECT * FROM subject WHERE Subject_ID = :Subject_ID";
     
     if($stmt = $pdo->prepare($sql)){
         // Bind variables to the prepared statement as parameters
-        $stmt->bindParam(":id", $param_id);
+        $stmt->bindParam(":Subject_ID", $param_Subject_ID);
         
         // Set parameters
-        $param_id = trim($_GET["id"]);
+        $param_Subject_ID = trim($_GET["Subject_ID"]);
         
         // Attempt to execute the prepared statement
         if($stmt->execute()){
@@ -22,12 +22,20 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 // Retrieve individual field value
-                $name = $row["name"];
-                $address = $row["address"];
-                $role = $row["role"];
+                $name = $row["subject_name"];
+                $subject_description = $row["subject_description"];
+                
 				$status = $row["status"];
-				$created_at = $row["created_at"];
-				$updated_at = $row["updated_at"];
+				$semester = $row["semester"];
+				$unit = $row["unit"];
+				$semester = $row["semester"];
+				$sub_class = $row["sub_class"];
+				$year_level = $row["year_level"];
+				$pre_rel = $row["pre_rel"];
+				$pre_order = $row["pre_order"];
+				$pre_status = $row["pre_status"];
+				$date_created = $row["date_created"];
+				$date_updated = $row["date_updated"];
 				
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
@@ -72,16 +80,16 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Name</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <label>Subject Name</label>
+                        <p><b><?php echo $row["subject_name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
-                        <p><b><?php echo $row["address"]; ?></b></p>
+                        <label>subject_description</label>
+                        <p><b><?php echo $row["subject_description"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
-                        <p><b><?php echo $row["role"]; ?></b></p>
+                        <label>unit</label>
+                        <p><b><?php echo $row["unit"]; ?></b></p>
                     </div>
 					<div class="form-group">
                         <label>Status</label>
@@ -89,13 +97,13 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                     </div>
 					<div class="form-group">
                         <label>Date Created</label>
-                        <p><b><?php echo $row["created_at"]; ?></b></p>
+                        <p><b><?php echo $row["date_created"]; ?></b></p>
                     </div>
 					<div class="form-group">
                         <label>Date Updated</label>
-                        <p><b><?php echo $row["updated_at"]; ?></b></p>
+                        <p><b><?php echo $row["date_updated"]; ?></b></p>
                     </div>
-                    <p><a href="crud.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>

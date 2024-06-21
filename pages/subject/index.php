@@ -10,7 +10,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         .wrapper{
-            width: 600px;
+            width: 100%;
             margin: 0 auto;
         }
         table tr td:last-child{
@@ -46,7 +46,8 @@
 </nav>
 <body>
     <div class="wrapper">
-        <div class="container-fluid">
+        <div class="TB" style="margin: 2%;">
+        <div class="TB" style="margin: 2%;">
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
@@ -55,21 +56,22 @@
                     </div>
                     <?php
                     // Include config file
-                    require_once "../config.php";
+                    require_once "../../config.php";
                     
                     // Attempt select query execution
-                    $sql = "SELECT * FROM employees";
+                    $sql = "SELECT * FROM subject";
                     if($result = $pdo->query($sql)){
                         if($result->rowCount() > 0){
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>#</th>";
-                                        echo "<th>Name</th>";
-                                        echo "<th>Address</th>";
-                                        echo "<th>Role</th>";
-										echo "<th>Status</th>";
-                                        
+										echo "<th>subject_semester_offered</th>";
+                                        echo "<th>Subject TAG</th>";
+                                        echo "<th>subject_descriptive_title</th>";
+                                        echo "<th>subject_subject_unitss</th>";
+										
+										echo "<th>subject_code</th>";
 										echo "<th>Date Created</th>";
 										echo "<th>Date updated_at</th>";
 										echo "<th>Action</th>";
@@ -78,17 +80,20 @@
                                 echo "<tbody>";
                                 while($row = $result->fetch()){
                                     echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['role'] . "</td>";
-										echo "<td>" . $row['status'] . "</td>";
-										echo "<td>" . $row['created_at'] . "</td>";
-										echo "<td>" . $row['updated_at'] . "</td>";
+									echo "<td>" . $row['subject_id'] . "</td>";
+										echo "<td>" . $row['subject_semester_offered'] . "</td>";
+                                        
+                                        echo "<td>" . $row['subject_tag'] . "</td>";
+                                        echo "<td>" . $row['subject_descriptive_title'] . "</td>";
+										echo "<td>" . $row['subject_units'] . "</td>";
+										
+										echo "<td>" . $row['subject_code'] . "</td>";
+										echo "<td>" . $row['subject_date_created'] . "</td>";
+										echo "<td>" . $row['subject_date_updated'] . "</td>";
                                         echo "<td>";
-                                            echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="read.php?subject_id='. $row['subject_id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="update.php?subject_id='. $row['subject_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="delete.php?subject_id='. $row['subject_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }
