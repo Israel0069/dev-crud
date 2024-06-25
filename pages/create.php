@@ -149,13 +149,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="invalid-feedback"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Role</label>
-                            <input type="text" name="role" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $role; ?>">
-                            <span class="invalid-feedback"><?php echo $role_err;?></span>
+                          
+								  <label for="sel1">Role:</label>
+								  <select id="sel1" type="text" name="role" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $role; ?>">
+									<option>Student</option>
+									<option>Admin</option>
+								  </select>
+							<span class="invalid-feedback"><?php echo $role_err;?></span>
                         </div>
 						 <div class="form-group">
                             <label>Status</label>
-                            <input type="text" name="status" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $status; ?>">
+							<select id="sel1" type="text" name="status" class="form-control <?php echo (!empty($role_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $status; ?>">
+									<option>Pending</option>
+									<option>Active</option>
+								  </select>
                             <span class="invalid-feedback"><?php echo $status_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
