@@ -3,8 +3,8 @@
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $role = $status = "";
-$name_err = $address_err = $role_err = $status_err = "";
+$first_name = $middle_name = $last_name = $address = $role = $status = "";
+$first_name_err = $middle_name_err = $last_name_err = $address_err = $role_err = $status_err = "";
 
 // Flag to check if the form was submitted successfully
 $form_submitted = false;
@@ -14,14 +14,34 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Get hidden input value
     $id = $_POST["id"];
     
-    // Validate name
-    $input_name = trim($_POST["name"]);
-    if(empty($input_name)){
-        $name_err = "Please enter a name.";
-    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-        $name_err = "Please enter a valid name.";
+    // Validate first_name
+    $input_first_name = trim($_POST["first_name"]);
+    if(empty($input_first_name)){
+        $first_name_err = "Please enter a first_name.";
+    } elseif(!filter_var($input_first_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $first_name_err = "Please enter a valid first_name.";
     } else{
-        $name = $input_name;
+        $first_name = $input_first_name;
+    }
+	
+	 // Validate middle_name
+    $input_middle_name = trim($_POST["middle_name"]);
+    if(empty($input_middle_name)){
+        $middle_name_err = "Please enter a middle_name.";
+    } elseif(!filter_var($input_middle_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $middle_name_err = "Please enter a valid middle_name.";
+    } else{
+        $middle_name = $input_middle_name;
+    }
+	
+		 // Validate last_name
+    $input_last_name = trim($_POST["last_name"]);
+    if(empty($input_last_name)){
+        $last_name_err = "Please enter a last_name.";
+    } elseif(!filter_var($input_last_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+        $last_name_err = "Please enter a valid last_name.";
+    } else{
+        $last_name = $input_last_name;
     }
     
     // Validate address address
@@ -48,21 +68,25 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
     
 // Check input errors before inserting in database
-   if(empty($name_err) && empty($address_err) && empty($role_err)){
+   if(empty($first_name_err) && empty($address_err) && empty($role_err)){
 
        // Prepare an update statement
-       $sql = "UPDATE employees SET name=:name, address=:address, role=:role, status=:status WHERE id=:id";
+       $sql = "UPDATE employees SET first_name=:first_name, middle_name=:middle_name, last_name=:last_name, address=:address, role=:role, status=:status WHERE id=:id";
 
        if($stmt = $pdo->prepare($sql)){
            // Set parameters
-           $param_name = $name;
+           $param_first_name = $first_name;
+		    $param_middle_name = $middle_name;
+			 $param_last_name = $last_name;
         $param_address = $address;
         $param_role = $role;
 		$param_status = $status;
            $param_id = $id;
 
            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":name", $param_name);
+            $stmt->bindParam(":first_name", $param_first_name);
+			$stmt->bindParam(":middle_name", $param_first_name);
+			$stmt->bindParam(":last_name", $param_first_name);
         $stmt->bindParam(":address", $param_address);
         $stmt->bindParam(":role", $param_role);
 		$stmt->bindParam(":status", $param_status);
@@ -95,7 +119,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                                $row = $stmt->fetch(PDO::FETCH_ASSOC);
                            
                                // Retrieve individual field value
-                               $name = $row["name"];
+                               $first_name = $row["first_name"];
+							   $middle_name = $row["middle_name"];
+							   $last_name = $row["last_name"];
                                $address = $row["address"];
                                $role = $row["role"];
                                
@@ -154,7 +180,9 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                     // Retrieve individual field value
-                    $name = $row["name"];
+                    $first_name = $row["first_name"];
+					$middle_name = $row["middle_name"];
+					$last_name = $row["last_name"];
                     $address = $row["address"];
                     $role = $row["role"];
 					$status = $row["status"];
@@ -212,9 +240,19 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     <p>Please edit the input values and submit to update the employee record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
-                            <span class="invalid-feedback"><?php echo $name_err;?></span>
+                            <label>First_name</label>
+                            <input type="text" name="first_name" class="form-control <?php echo (!empty($first_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $first_name; ?>">
+                            <span class="invalid-feedback"><?php echo $first_name_err;?></span>
+                        </div>
+						<div class="form-group">
+                            <label>Middle_name</label>
+                            <input type="text" name="middle_name" class="form-control <?php echo (!empty($middle_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $middle_name; ?>">
+                            <span class="invalid-feedback"><?php echo $middle_name_err;?></span>
+                        </div>
+						<div class="form-group">
+                            <label>Last_name</label>
+                            <input type="text" name="last_name" class="form-control <?php echo (!empty($last_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $last_name; ?>">
+                            <span class="invalid-feedback"><?php echo $last_name_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Address</label>

@@ -72,7 +72,9 @@
                                 echo "<thead>";
                                     echo "<tr>";
                                         echo "<th>#</th>";
-                                        echo "<th>Name</th>";
+                                        echo "<th>First Name</th>";
+										 echo "<th>Last Name</th>";
+										  echo "<th>Middle Name</th>";
                                         echo "<th>Address</th>";
                                         echo "<th>Role</th>";
 										echo "<th>Status</th>";
@@ -86,7 +88,9 @@
                                 while($row = $result->fetch()){
                                     echo "<tr>";
                                         echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td>" . $row['first_name'] . "</td>";
+										echo "<td>" . $row['last_name'] . "</td>";
+										echo "<td>" . $row['middle_name'] . "</td>";
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['role'] . "</td>";
 										echo "<td>" . $row['status'] . "</td>";

@@ -22,7 +22,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 // Retrieve individual field value
-                $name = $row["name"];
+                $first_name = $row["first_name"];
                 $address = $row["address"];
                 $role = $row["role"];
 				$status = $row["status"];
@@ -72,8 +72,8 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Name</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <label>first_name</label>
+                        <p><b><?php echo $row["first_name"]; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
