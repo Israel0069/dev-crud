@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2024 at 02:55 AM
+-- Generation Time: Jun 25, 2024 at 10:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -29,7 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `employees` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `role` varchar(200) DEFAULT NULL,
   `status` varchar(250) DEFAULT NULL,
@@ -41,8 +43,25 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `name`, `address`, `role`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Yawa', 'kaayu', 'Student', 'pending', '2024-06-20 07:44:04', '2024-06-20 07:44:04');
+INSERT INTO `employees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `role`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Yawal', NULL, NULL, 'kaayu', 'Student', 'pending', '2024-06-20 07:44:04', '2024-06-20 07:44:04'),
+(2, 'Troy Israel', NULL, NULL, 'Manolos', 'student', 'active', '2024-06-25 01:14:10', '2024-06-25 01:14:10'),
+(3, 'Troy Israel', NULL, NULL, 'manolo', 'Student', 'pending', '2024-06-25 01:23:30', '2024-06-25 01:23:30'),
+(5, 'animal', NULL, NULL, 'manolo', 'Student', 'pending', '2024-06-25 01:43:41', '2024-06-25 01:43:41'),
+(6, 'Troy Estillore', NULL, NULL, 'libona', 'Student', 'pending', '2024-06-25 01:57:11', '2024-06-25 01:57:11'),
+(7, 'Troy bago', NULL, NULL, 'manolo', 'Student', 'pending', '2024-06-25 02:53:05', '2024-06-25 02:53:05'),
+(8, 'Ellyzen Gwapa', NULL, NULL, 'Santiago', 'Student', 'pending', '2024-06-25 03:07:48', '2024-06-25 03:07:48'),
+(9, 'Troy Israel', NULL, NULL, 'manolo', '1', 'pending', '2024-06-25 04:53:44', '2024-06-25 04:53:44'),
+(10, 'Troy Israel', NULL, NULL, 'AMAW', '1', 'pending', '2024-06-25 04:54:21', '2024-06-25 04:54:21'),
+(11, 'Troy Israel', NULL, NULL, 'amawsasasas', '1', 'pending', '2024-06-25 04:56:56', '2024-06-25 04:56:56'),
+(12, 'Troy Israel', NULL, NULL, 'pesti', '1', 'pending', '2024-06-25 04:57:28', '2024-06-25 04:57:28'),
+(13, 'Troy Israel', NULL, NULL, 'manolo', 'Admin', 'pending', '2024-06-25 05:01:07', '2024-06-25 05:01:07'),
+(14, 'Troy Israel', NULL, NULL, 'manolos', 'Student', 'pending', '2024-06-25 05:01:27', '2024-06-25 05:01:27'),
+(15, 'Troy Israel', NULL, NULL, 'manolo', 'Student', 'Active', '2024-06-25 05:03:36', '2024-06-25 05:03:36'),
+(16, 'Beazel', 'P', '', 'amwa', 'Student', 'Pending', '2024-06-25 08:07:42', '2024-06-25 08:07:42'),
+(17, 'Alacon', 'C', '', 'manolo', 'Student', 'Pending', '2024-06-25 08:08:38', '2024-06-25 08:08:38'),
+(18, 'Amaw', 'A', '', 'Manolo', 'Student', 'Pending', '2024-06-25 08:09:41', '2024-06-25 08:09:41'),
+(19, 'Galaw', 'G', 'Ka', 'Manolo', 'Student', 'Pending', '2024-06-25 08:10:41', '2024-06-25 08:10:41');
 
 -- --------------------------------------------------------
 
@@ -112,7 +131,7 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `subject`
